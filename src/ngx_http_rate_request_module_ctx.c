@@ -2,18 +2,17 @@
 
 ngx_int_t ngx_http_rate_request_init(ngx_conf_t *cf);
 
-ngx_http_module_t ngx_http_rate_request_module_ctx = {
-        NULL,                                  /* preconfiguration */
-        ngx_http_rate_request_init,            /* post-configuration */
+ngx_http_module_t ngx_http_rate_request_module_ctx = {NULL,                                  /* preconfiguration */
+                                                      ngx_http_rate_request_init,            /* post-configuration */
 
-        NULL,                                  /* create main configuration */
-        NULL,                                  /* init main configuration */
+                                                      NULL,                                  /* create main configuration */
+                                                      NULL,                                  /* init main configuration */
 
-        NULL,                                  /* create server configuration */
-        NULL,                                  /* merge server configuration */
+                                                      NULL,                                  /* create server configuration */
+                                                      NULL,                                  /* merge server configuration */
 
-        ngx_http_rate_request_create_conf,     /* create location configuration */
-        ngx_http_rate_request_merge_conf       /* merge location configuration */
+                                                      ngx_http_rate_request_create_conf,     /* create location configuration */
+                                                      ngx_http_rate_request_merge_conf       /* merge location configuration */
 };
 
 ngx_int_t ngx_http_rate_request_init(ngx_conf_t *cf) {

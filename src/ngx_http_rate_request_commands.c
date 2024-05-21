@@ -43,8 +43,7 @@ char *ngx_http_rate_request_set(ngx_conf_t *cf, __attribute__((unused)) ngx_comm
     value[1].data++;
 
     if (rrcf->vars == NGX_CONF_UNSET_PTR) {
-        rrcf->vars = ngx_array_create(cf->pool, 1,
-                                      sizeof(ngx_http_rate_request_variable_t));
+        rrcf->vars = ngx_array_create(cf->pool, 1, sizeof(ngx_http_rate_request_variable_t));
         if (rrcf->vars == NULL) {
             return NGX_CONF_ERROR;
         }

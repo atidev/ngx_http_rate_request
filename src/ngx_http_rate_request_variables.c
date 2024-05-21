@@ -1,26 +1,22 @@
 #include "ngx_http_rate_request_variables.h"
 
 
-ngx_int_t ngx_http_rate_request_variable(ngx_http_request_t *r, ngx_http_variable_value_t *v,
-                                         __attribute__((unused)) uintptr_t data) {
-    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,
-                   "rate request variable");
+ngx_int_t ngx_http_rate_request_variable(ngx_http_request_t *r, ngx_http_variable_value_t *v, __attribute__((unused)) uintptr_t data) {
+    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, r->connection->log, 0, "rate request variable");
 
     v->not_found = 1;
 
     return NGX_OK;
 }
 
-ngx_int_t ngx_http_rate_request_set_variables(ngx_http_request_t *r, ngx_http_rate_request_conf_t *rrcf,
-                                              ngx_http_rate_request_ctx_t *ctx) {
+ngx_int_t ngx_http_rate_request_set_variables(ngx_http_request_t *r, ngx_http_rate_request_conf_t *rrcf, ngx_http_rate_request_ctx_t *ctx) {
     ngx_str_t val;
     ngx_http_variable_t *v;
     ngx_http_variable_value_t *vv;
     ngx_http_rate_request_variable_t *av, *last;
     ngx_http_core_main_conf_t *cmcf;
 
-    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,
-                   "rate request set variables");
+    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, r->connection->log, 0, "rate request set variables");
 
     if (rrcf->vars == NULL) {
         return NGX_OK;

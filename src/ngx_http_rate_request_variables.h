@@ -14,11 +14,8 @@ typedef struct ngx_http_rate_request_variable_s {
 } ngx_http_rate_request_variable_t;
 
 
-ngx_int_t
-ngx_http_rate_request_variable(ngx_http_request_t *r, ngx_http_variable_value_t *v, __attribute__((unused)) uintptr_t data);
+ngx_int_t ngx_http_rate_request_variable(ngx_http_request_t *r, ngx_http_variable_value_t *v, __attribute__((unused)) uintptr_t data);
 
-ngx_int_t
-ngx_http_rate_request_set_variables(ngx_http_request_t *r, ngx_http_rate_request_conf_t *rrcf,
-                                    ngx_http_rate_request_ctx_t *ctx);
+ngx_int_t ngx_http_rate_request_set_variables(ngx_http_request_t *r, ngx_http_rate_request_conf_t *rrcf, ngx_http_rate_request_ctx_t *ctx);
 
 #endif //NGINX_NGX_HTTP_RATE_REQUEST_VARIABLES_H

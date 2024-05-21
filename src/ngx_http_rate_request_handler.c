@@ -2,11 +2,9 @@
 #include "ngx_http_rate_request_variables.h"
 
 static ngx_int_t
-ngx_http_rate_request_handler_handle_result(ngx_http_request_t *r, ngx_http_rate_request_ctx_t *ctx,
-                                            ngx_http_rate_request_conf_t *rrcf);
+ngx_http_rate_request_handler_handle_result(ngx_http_request_t *r, ngx_http_rate_request_ctx_t *ctx, ngx_http_rate_request_conf_t *rrcf);
 
-static ngx_int_t
-ngx_http_rate_request_handler_begin_subrequest(ngx_http_request_t *r, ngx_http_rate_request_conf_t *rrcf);
+static ngx_int_t ngx_http_rate_request_handler_begin_subrequest(ngx_http_request_t *r, ngx_http_rate_request_conf_t *rrcf);
 
 ngx_int_t ngx_http_rate_request_handler(ngx_http_request_t *r) {
     ngx_http_rate_request_ctx_t *ctx;
@@ -18,8 +16,7 @@ ngx_int_t ngx_http_rate_request_handler(ngx_http_request_t *r) {
         return NGX_DECLINED;
     }
 
-    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,
-                   "rate request handler");
+    ngx_log_debug0(NGX_LOG_DEBUG_HTTP, r->connection->log, 0, "rate request handler");
 
     ctx = ngx_http_get_module_ctx(r, ngx_http_rate_request_module);
 
@@ -31,8 +28,7 @@ ngx_int_t ngx_http_rate_request_handler(ngx_http_request_t *r) {
 }
 
 static ngx_int_t
-ngx_http_rate_request_handler_handle_result(ngx_http_request_t *r, ngx_http_rate_request_ctx_t *ctx,
-                                            ngx_http_rate_request_conf_t *rrcf) {
+ngx_http_rate_request_handler_handle_result(ngx_http_request_t *r, ngx_http_rate_request_ctx_t *ctx, ngx_http_rate_request_conf_t *rrcf) {
     if (!ctx->done) {
         return NGX_AGAIN;
     }
@@ -49,17 +45,14 @@ ngx_http_rate_request_handler_handle_result(ngx_http_request_t *r, ngx_http_rate
         return NGX_OK;
     }
 
-    ngx_log_error(NGX_LOG_ERR, r->connection->log, 0,
-                  "rate request unexpected status: %ui", ctx->status);
+    ngx_log_error(NGX_LOG_ERR, r->connection->log, 0, "rate request unexpected status: %ui", ctx->status);
 
     return NGX_HTTP_INTERNAL_SERVER_ERROR;
 }
 
-static ngx_int_t
-ngx_http_rate_request_done(ngx_http_request_t *r, void *data, ngx_int_t rc);
+static ngx_int_t ngx_http_rate_request_done(ngx_http_request_t *r, void *data, ngx_int_t rc);
 
-static ngx_int_t
-ngx_http_rate_request_handler_begin_subrequest(ngx_http_request_t *r, ngx_http_rate_request_conf_t *rrcf) {
+static ngx_int_t ngx_http_rate_request_handler_begin_subrequest(ngx_http_request_t *r, ngx_http_rate_request_conf_t *rrcf) {
     ngx_http_request_t *sr;
     ngx_http_post_subrequest_t *ps;
     ngx_http_rate_request_ctx_t *ctx;
@@ -95,12 +88,10 @@ ngx_http_rate_request_handler_begin_subrequest(ngx_http_request_t *r, ngx_http_r
     return NGX_AGAIN;
 }
 
-static ngx_int_t
-ngx_http_rate_request_done(ngx_http_request_t *r, void *data, ngx_int_t rc) {
+static ngx_int_t ngx_http_rate_request_done(ngx_http_request_t *r, void *data, ngx_int_t rc) {
     ngx_http_rate_request_ctx_t *ctx = data;
 
-    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r->connection->log, 0,
-                   "rate request done s:%ui", r->headers_out.status);
+    ngx_log_debug1(NGX_LOG_DEBUG_HTTP, r->connection->log, 0, "rate request done s:%ui", r->headers_out.status);
 
     ctx->done = 1;
     ctx->status = (ngx_int_t) r->headers_out.status;
