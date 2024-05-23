@@ -1,5 +1,24 @@
 #include "ngx_http_rate_request_commands.h"
 
+char *ngx_http_rate_request(ngx_conf_t *cf, __attribute__((unused)) ngx_command_t *cmd, void *conf);
+
+char *ngx_http_rate_request_set(ngx_conf_t *cf, __attribute__((unused)) ngx_command_t *cmd, void *conf);
+
+ngx_command_t ngx_http_rate_request_commands[] = {{ngx_string("rate_request"),
+                                                   NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_CONF_TAKE1,
+                                                   ngx_http_rate_request,
+                                                   NGX_HTTP_LOC_CONF_OFFSET,
+                                                   0,
+                                                   NULL},
+                                                  {ngx_string("rate_request_set"),
+                                                   NGX_HTTP_MAIN_CONF | NGX_HTTP_SRV_CONF | NGX_HTTP_LOC_CONF | NGX_CONF_TAKE2,
+                                                   ngx_http_rate_request_set,
+                                                   NGX_HTTP_LOC_CONF_OFFSET,
+                                                   0,
+                                                   NULL},
+                                                  ngx_null_command};
+
+
 char *ngx_http_rate_request(ngx_conf_t *cf, __attribute__((unused)) ngx_command_t *cmd, void *conf) {
     ngx_http_rate_request_conf_t *rrcf = conf;
 
@@ -22,7 +41,6 @@ char *ngx_http_rate_request(ngx_conf_t *cf, __attribute__((unused)) ngx_command_
 
     return NGX_CONF_OK;
 }
-
 
 char *ngx_http_rate_request_set(ngx_conf_t *cf, __attribute__((unused)) ngx_command_t *cmd, void *conf) {
     ngx_http_rate_request_conf_t *rrcf = conf;
@@ -83,3 +101,4 @@ char *ngx_http_rate_request_set(ngx_conf_t *cf, __attribute__((unused)) ngx_comm
 
     return NGX_CONF_OK;
 }
+
