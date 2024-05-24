@@ -1,7 +1,5 @@
 #include "ngx_http_rate_request_module_ctx.h"
 
-ngx_int_t ngx_http_rate_request_init(ngx_conf_t *cf);
-
 ngx_http_module_t ngx_http_rate_request_module_ctx = {NULL,                                  /* preconfiguration */
                                                       ngx_http_rate_request_init,            /* post-configuration */
 
@@ -30,5 +28,3 @@ ngx_int_t ngx_http_rate_request_init(ngx_conf_t *cf) {
 
     return NGX_OK;
 }
-
-

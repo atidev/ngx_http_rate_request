@@ -18,7 +18,6 @@ ngx_command_t ngx_http_rate_request_commands[] = {{ngx_string("rate_request"),
                                                    NULL},
                                                   ngx_null_command};
 
-
 char *ngx_http_rate_request(ngx_conf_t *cf, __attribute__((unused)) ngx_command_t *cmd, void *conf) {
     ngx_http_rate_request_conf_t *rrcf = conf;
 

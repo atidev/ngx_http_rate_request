@@ -1,6 +1,7 @@
 ngx_module_type=HTTP
 ngx_module_name=ngx_http_rate_request_module
 
+ngx_module_deps=$(find ${ngx_addon_dir}/src -name '*.h' | tr "\n" " ")
 ngx_module_srcs=$(find ${ngx_addon_dir}/src -name '*.c' | tr "\n" " ")
 
 . auto/module
@@ -11,6 +12,6 @@ next="ngx_http_auth_request_module"
 
 modules_var=${ngx_module_type}_MODULES
 
-fixed_modules_var=$(eval echo \$${modules_var} | sed "s/${next}/${ngx_module_name} ${next}/")
+fixed_modules=$(eval echo \$${modules_var} | sed "s/${next}/${ngx_module_name} ${next}/")
 
-eval ${modules_var}="${fixed_modules_var}"
+eval "${modules_var}=\${fixed_modules}"
