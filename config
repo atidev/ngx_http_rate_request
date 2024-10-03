@@ -15,7 +15,7 @@ modules_var_content=$(eval echo \$${modules_var})
 if [[ ${modules_var_content} == *"ngx_http_auth_request_module"* ]]; then
   next="ngx_http_auth_request_module"
 
-  fixed_modules=$(echo ${modules_var_content} | sed "s/${next}/${ngx_module_name} ${next}/")
+  fixed_modules=$(echo ${modules_var_content} | sed  "s/${ngx_module_name}//" | sed "s/${next}/${ngx_module_name} ${next}/")
 else
   fixed_modules="${modules_var_content} ${ngx_module_name}"
 fi
