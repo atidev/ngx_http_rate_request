@@ -8,8 +8,16 @@ ngx_module_srcs=$(find ${ngx_addon_dir}/src -name '*.c' | tr "\n" " ")
 
 ngx_addon_name=${ngx_module_name}
 
-if [[ "$HTTP_MODULES" == *"ngx_http_auth_request_module"* ]]; then
+modules_var=${ngx_module_type}_MODULES
+
+modules_var_content=$(eval echo \$${modules_var})
+
+if [[ "${modules_var_content}" == *"ngx_http_auth_request_module"* ]]; then
   next="ngx_http_auth_request_module"
 
-  HTTP_MODULES=$(echo $HTTP_MODULES | sed  "s/${ngx_module_name}//" | sed "s/${next}/${ngx_module_name} ${next}/")
+  fixed_modules=$(echo ${modules_var_content} | sed  "s/${ngx_module_name}//" | sed "s/${next}/${ngx_module_name} ${next}/")
+else
+  fixed_modules="${modules_var_content}"
 fi
+
+eval "${modules_var}=\${fixed_modules}"
